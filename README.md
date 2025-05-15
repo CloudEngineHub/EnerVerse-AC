@@ -17,7 +17,7 @@ This repo is the official implementation of EnerVerse-AC: Envisioning Embodied E
 
 ### Setup
 ```
-git clone --recursive gh repo clone AgibotTech/EnerVerse-AC
+git clone https://github.com/AgibotTech/EnerVerse-AC.git
 conda create -n enerverse python=3.10.4
 conda activate enerverse
 pip install -r requirements.txt`
