@@ -48,6 +48,10 @@ We provide processed examples in ``examples/examples*`` to clarify the usage of 
 python main/generate_video_acwm.py -i examples/examples0/frame.png -a examples/examples0/action.npy -ex examples/examples0/extrinsics.npy -in examples/examples0/intrinsics.npy -s ./result_video_root --ckp_path PATH_TO_CHECKPOINT --config_path PATH_TO_CONFIG
 ```
 
+### Train
+
+We have provided a minial version of training codes in ``https://github.com/AgibotTech/AgiBotWorldChallengeIROS2025-WorldModelBaseline.git``. Feel free to train your own World Model!
+
 
 ### Related Works
 This project draws inspiration from the following projects:
