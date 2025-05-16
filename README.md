@@ -60,7 +60,7 @@ This project draws inspiration from the following projects:
 ### Citation
 Please consider citing our paper if our codes are useful:
 ```bib
-@article{huang2025enerverse,
+@article{huang2025enerverseac,
   title={EnerVerse-AC: Envisioning Embodied Environments with Action Condition},
   author={Jiang, Yuxin and Chen, Shengcong and Huang, Siyuan and Chen, Liliang and Zhou, Pengfei and Liao, Yue and He, Xindong and Liu, Chiming and Li, Hongsheng and Yao, Maoqing and Ren, Guanghui},
   journal={arXiv preprint arXiv:2505.09723},
