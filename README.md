@@ -9,7 +9,8 @@
 
 </div>
 
-This repo is the official implementation of EnerVerse-AC: Envisioning Embodied Environments with Action Condition.
+This repo is the official implementation of EnerVerse-AC: Envisioning Embodied Environments with Action Condition, featuring minimal inference code to run single-view video generation.
+
 This repo contains minimal inference code to run single-view video generation.
 
 ## Getting started
@@ -26,6 +27,7 @@ pip install -r requirements.txt`
 ### Inference
 
 1. Download the single-view checkpoint from [EVAC](https://huggingface.co/agibot-world/EnerVerse-AC), and modify ``model.pretrained_checkpoint`` in ``configs/agibotworld/train_configs.yaml`` to the checkpoint file ``*.pt``
+
 Note: Due to commercial restrictions on portions of the training data referenced in the paper, the released model weights were trained exclusively on the open-source [AgibotWorld dataset](https://github.com/OpenDriveLab/AgiBot-World) and do not include any failure trajectory data.
 
 2. Download the weights of [CLIP](https://huggingface.co/laion/CLIP-ViT-H-14-laion2B-s32B-b79K) and modify ``model.params.img_cond_stage_config.params.abspath`` in ``configs/agibotworld/config.yaml`` to the absolute path to ``open_clip_pytorch_model.bin`` inside the download directory
