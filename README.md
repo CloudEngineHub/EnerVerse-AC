@@ -4,7 +4,7 @@
 
 ![Framework](imgs/overview.png)
 
- <a href='https://arxiv.org/abs/2501.01895'><img src='https://img.shields.io/badge/arXiv-2501.01895-b31b1b.svg'></a> &nbsp; <a href='https://sites.google.com/view/enerverse'><img src='https://img.shields.io/badge/Site-EnerVerse-blue'></a> &nbsp;  <a href='https://huggingface.co/agibot-world/EnerVerse-AC'><img src='https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Weight-blue'></a> &nbsp;
+ <a href='https://arxiv.org/abs/2505.09723'><img src='https://img.shields.io/badge/arXiv-2505.09723-b31b1b.svg'></a> &nbsp; <a href='https://annaj2178.github.io/EnerverseAC.github.io'><img src='https://img.shields.io/badge/Site-EnerVerseAC-blue'></a> &nbsp;  <a href='https://huggingface.co/agibot-world/EnerVerse-AC'><img src='https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Weight-blue'></a> &nbsp;
 
 
 </div>
@@ -20,7 +20,7 @@ This repo is the official implementation of EnerVerse-AC: Envisioning Embodied E
 git clone https://github.com/AgibotTech/EnerVerse-AC.git
 conda create -n enerverse python=3.10.4
 conda activate enerverse
-pip install -r requirements.txt`
+pip install -r requirements.txt
 ```
 
 ### Inference
@@ -61,7 +61,13 @@ This project draws inspiration from the following projects:
 Please consider citing our paper if our codes are useful:
 ```bib
 @article{huang2025enerverse,
-  title={Enerverse: Envisioning Embodied Future Space for Robotics Manipulation},
+  title={EnerVerse-AC: Envisioning Embodied Environments with Action Condition},
+  author={Jiang, Yuxin and Chen, Shengcong and Huang, Siyuan and Chen, Liliang and Zhou, Pengfei and Liao, Yue and He, Xindong and Liu, Chiming and Li, Hongsheng and Yao, Maoqing and Ren, Guanghui},
+  journal={arXiv preprint arXiv:2505.09723},
+  year={2025}
+}
+@article{huang2025enerverse,
+  title={Enerverse: Envisioning embodied future space for robotics manipulation},
   author={Huang, Siyuan and Chen, Liliang and Zhou, Pengfei and Chen, Shengcong and Jiang, Zhengkai and Hu, Yue and Liao, Yue and Gao, Peng and Li, Hongsheng and Yao, Maoqing and others},
   journal={arXiv preprint arXiv:2501.01895},
   year={2025}
