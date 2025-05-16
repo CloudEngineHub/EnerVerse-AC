@@ -50,7 +50,9 @@ python main/generate_video_acwm.py -i examples/examples0/frame.png -a examples/e
 
 ### Train
 
-We have provided a minial version of training codes in ``https://github.com/AgibotTech/AgiBotWorldChallengeIROS2025-WorldModelBaseline.git``. Feel free to train your own World Model!
+🔥 EVAC serves as the official baseline model for the [AgiBot World Challenge@IROS 2025](https://agibot-world.com/challenge) - World Model Track. [The Challenge repository](https://github.com/AgibotTech/AgiBotWorldChallengeIROS2025-WorldModelBaseline) provides a minimal version of the training code for reference. Feel free to train the model and explore its capabilities!
+
+🔥 Don't miss the [AgiBot World Challenge@IROS 2025](https://agibot-world.com/challenge) - come be part of it!
 
 
 ### Related Works
