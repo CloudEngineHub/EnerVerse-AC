@@ -11,7 +11,6 @@
 
 This repo is the official implementation of EnerVerse-AC: Envisioning Embodied Environments with Action Condition, featuring minimal inference code to run single-view video generation.
 
-This repo contains minimal inference code to run single-view video generation.
 
 ## Getting started
 
