@@ -14,13 +14,20 @@ This repo is the official implementation of EnerVerse-AC: Envisioning Embodied E
 
 ## Getting started
 
+The codebase was tested with Python 3.10.4, CUDA version 11.8 and Pytorch version 2.4.0.
 
 ### Setup
 ```
 git clone https://github.com/AgibotTech/EnerVerse-AC.git
 conda create -n enerverse python=3.10.4
 conda activate enerverse
+
 pip install -r requirements.txt
+
+### install pytorch3d following https://github.com/facebookresearch/pytorch3d
+### note that although the CUDA version is 11.8, we use the pytorch3d prebuilt on CUDA 12.1
+pip install --no-index --no-cache-dir pytorch3d -f https://dl.fbaipublicfiles.com/pytorch3d/packaging/wheels/py310_cu121_pyt240/download.html
+
 ```
 
 ### Inference
