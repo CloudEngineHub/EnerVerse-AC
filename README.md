@@ -14,7 +14,7 @@ This repo is the official implementation of EnerVerse-AC: Envisioning Embodied E
 
 ## Getting started
 
-The codebase was tested with Python 3.10.4, CUDA version 11.8 and Pytorch version 2.4.0.
+The codebase was tested with Python 3.10.4, CUDA version 11.8 (higher cuda versions should work) and Pytorch version 2.4.0.
 
 ### Setup
 ```
