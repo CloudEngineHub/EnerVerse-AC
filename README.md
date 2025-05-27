@@ -38,7 +38,7 @@ Note: Due to commercial restrictions on portions of the training data referenced
 
 2. Download the weights of [CLIP](https://huggingface.co/laion/CLIP-ViT-H-14-laion2B-s32B-b79K) and modify ``model.params.img_cond_stage_config.params.abspath`` in ``configs/agibotworld/config.yaml`` to the absolute path to ``open_clip_pytorch_model.bin`` inside the download directory
 
-3. Prepare necessary files, including one start frame, an action file (\*.npy), an extrinsic file (\*.npy), an intrinsic file (\*.npy). A simple conversion script from AgiBotWorld to the expected files is provided in tools/prepare_infer_data.py.
+3. Prepare necessary files, including one start frame, an action file (\*.npy or \*.h5), an extrinsic file (\*.npy or \*.json), an intrinsic file (\*.npy or \*.json). A simple conversion script from AgiBotWorld to the expected files is provided in tools/prepare_infer_data.py.
 
 ```
 python tools/prepare_infer_data.py -r PATH_TO_AGIBOTWORLD_ROOT -t TASK_ID -e EPISODE_ID -s SAVE_ROOT -j JSON_OF_ACTION_INDEXES_TO_EXTRACT -c CAM_NAME

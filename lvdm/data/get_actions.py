@@ -30,7 +30,9 @@ def get_actions(gripper, all_ends_p=None, all_ends_o=None, slices=None, delta_ac
     cvt_vis_l = Rotation.from_euler("xyz", np.array(EEF2CamLeft))
     cvt_vis_r = Rotation.from_euler("xyz", np.array(EEF2CamRight))
     for i in slices:
-
+        if i >= all_ends_o.shape[0]:
+            break
+        
         rot_l = Rotation.from_quat(all_ends_o[i, 0])
         rot_vis_l = rot_l*cvt_vis_l
         left_vis_quat = np.concatenate((all_ends_p[i,0], rot_vis_l.as_quat()), axis=0)

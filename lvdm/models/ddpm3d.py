@@ -1525,7 +1525,7 @@ class ACWMLatentDiffusion(LatentDiffusion):
     def inference(
         self, config, memories, action, delta_action,
         c2w_list, w2c_list, intrinsic_list, target_dir, num_chunk,
-        n_previous=4, chunk=None,
+        n_previous=4, chunk=None, n_valid=-1,
         sample=True, ddim_steps=50, ddim_eta=1, unconditional_guidance_scale=7.5, guidance_rescale=0.7, dataset_name="agibotworld", saving_tag="",
         inference_dtype = torch.float16, fps=2, saving_fps=30,
         **kwargs
@@ -1663,6 +1663,7 @@ class ACWMLatentDiffusion(LatentDiffusion):
                 ), dim=2)
 
             if traj.shape[3] < chunk+n_previous:
+                ### pad with last frame action
                 traj = torch.cat((
                     traj,
                     traj[:,:,:,-1:].repeat(1,1,1,chunk+n_previous-traj.shape[3],1,1)
@@ -1797,6 +1798,8 @@ class ACWMLatentDiffusion(LatentDiffusion):
         ### save video
         ### outputs: {t, 2h, (b v w), c}
         outputs = torch.cat((x_samples_video, traj_samples_video), dim=1).data.cpu().numpy()
+        if n_valid>0:
+            outputs = outputs[:n_valid]
         container = av.open(os.path.join(target_dir, f'outputs{saving_tag}.mp4'), "w")
         stream = container.add_stream('h264', rate=saving_fps)
         stream.width = outputs[0].shape[1]
