@@ -26,7 +26,7 @@ model:
     image_proj_model_trainable: True
     traj_prompt_proj_model_trainable: True
     conditioning_key: hybrid
-    image_size: [10, 16]
+    image_size: [40, 64]
     channels: 4
     scale_by_std: False
     scale_factor: 0.18215
