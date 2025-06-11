@@ -237,7 +237,7 @@ if __name__ == "__main__":
 
     parser.add_argument(
         "--n_chunk", type=int, default=-1,
-        help="number of chunks to predict"
+        help="number of chunks to predict. If n_chunk<=0, it will be set according to the length of the input actions."
     )
     parser.add_argument(
         "--ddim_steps", type=int, default=27,
