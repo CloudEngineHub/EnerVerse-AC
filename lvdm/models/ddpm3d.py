@@ -1527,7 +1527,8 @@ class ACWMLatentDiffusion(LatentDiffusion):
         c2w_list, w2c_list, intrinsic_list, target_dir, num_chunk,
         n_previous=4, chunk=None, n_valid=-1,
         sample=True, ddim_steps=50, ddim_eta=1, unconditional_guidance_scale=7.5, guidance_rescale=0.7, dataset_name="agibotworld", saving_tag="",
-        inference_dtype = torch.float16, fps=2, saving_fps=30,
+        inference_dtype = torch.float16, fps=2,
+        saving_video=False, saving_fps=5, video_dir=None,
         **kwargs
     ):
 
@@ -1542,6 +1543,8 @@ class ACWMLatentDiffusion(LatentDiffusion):
         self.rand_cond_frame = False
 
         os.makedirs(target_dir, exist_ok=True)
+        if saving_video:
+            os.makedirs(video_dir, exist_ok=True)
 
         if chunk is None:
             chunk = self.chunk
@@ -1794,23 +1797,33 @@ class ACWMLatentDiffusion(LatentDiffusion):
         traj_samples_video = rearrange(traj_all, 'b c v t h w -> t h (b v w) c') * 255
         traj_samples_video = torch.round(traj_samples_video).to(torch.uint8)
 
-
         ### save video
-        ### outputs: {t, 2h, (b v w), c}
-        outputs = torch.cat((x_samples_video, traj_samples_video), dim=1).data.cpu().numpy()
-        if n_valid>0:
-            outputs = outputs[:n_valid]
-        container = av.open(os.path.join(target_dir, f'outputs{saving_tag}.mp4'), "w")
-        stream = container.add_stream('h264', rate=saving_fps)
-        stream.width = outputs[0].shape[1]
-        stream.height = outputs[0].shape[0]
-        for frame_i in range(outputs.shape[0]):
-            frame = av.VideoFrame.from_ndarray(outputs[frame_i], format='rgb24')
-            for packet in stream.encode(frame):
+        ### outputs: {t, 2h, (1 v w), c}
+        if saving_video:
+            outputs = torch.cat((x_samples_video, traj_samples_video), dim=1).data.cpu().numpy()
+            if n_valid>0:
+                outputs = outputs[:n_valid]
+            container = av.open(os.path.join(video_dir, f'outputs{saving_tag}.mp4'), "w")
+            stream = container.add_stream('h264', rate=saving_fps)
+            stream.width = outputs[0].shape[1]
+            stream.height = outputs[0].shape[0]
+            for frame_i in range(outputs.shape[0]):
+                frame = av.VideoFrame.from_ndarray(outputs[frame_i], format='rgb24')
+                for packet in stream.encode(frame):
+                    container.mux(packet)
+            for packet in stream.encode():
                 container.mux(packet)
-        for packet in stream.encode():
-            container.mux(packet)
-        container.close()
+            container.close()
+
+        ### save images
+        ### x_samples_video: {t, h, w, c}
+
+        assert(x_samples_video.shape[0]>=n_valid)
+        x_samples_video = x_samples_video[:n_valid]
+        x_samples_video = x_samples_video.data.cpu().numpy()
+        for frame_i in range(x_samples_video.shape[0]):
+            frame = x_samples_video[frame_i]
+            cv2.imwrite(os.path.join(target_dir, "frame_{:05d}.png".format(frame_i)), frame[:,:,::-1])
 
 
         del pred, traj_all, samples

@@ -11,15 +11,15 @@ def normalize_angles(radius):
 
 def get_actions(gripper, all_ends_p=None, all_ends_o=None, slices=None, delta_act_sidx=None):
 
-    if slices is None:
-        n = all_ends_p.shape[0]
-        slices = list(range(n))
-    else:
-        n = len(slices)
     if delta_act_sidx is None:
         delta_act_sidx = 1
+
+    if slices is None:
+        ### the first frame is repeated to fill memory
+        n = all_ends_p.shape[0]-1+delta_act_sidx
+        slices = [0,]*(delta_act_sidx-1) + list(range(all_ends_p.shape[0]))
     else:
-        assert(delta_act_sidx > 1)
+        n = len(slices)
 
     all_left_rpy = []
     all_right_rpy = []
@@ -30,8 +30,6 @@ def get_actions(gripper, all_ends_p=None, all_ends_o=None, slices=None, delta_ac
     cvt_vis_l = Rotation.from_euler("xyz", np.array(EEF2CamLeft))
     cvt_vis_r = Rotation.from_euler("xyz", np.array(EEF2CamRight))
     for i in slices:
-        if i >= all_ends_o.shape[0]:
-            break
         
         rot_l = Rotation.from_quat(all_ends_o[i, 0])
         rot_vis_l = rot_l*cvt_vis_l
@@ -61,16 +59,16 @@ def get_actions(gripper, all_ends_p=None, all_ends_o=None, slices=None, delta_ac
     all_delta_actions = np.zeros([n-delta_act_sidx, 14])
     for i in range(0, n):
         all_abs_actions[i, 0:7] = all_left_quat[i, :7]
-        all_abs_actions[i, 7] = gripper[i, 0]
+        all_abs_actions[i, 7] = gripper[slices[i], 0]
         all_abs_actions[i, 8:15] = all_right_quat[i, :7]
-        all_abs_actions[i, 15] = gripper[i, 1]
+        all_abs_actions[i, 15] = gripper[slices[i], 1]
         if i >= delta_act_sidx:
             all_delta_actions[i-delta_act_sidx, 0:6] = all_left_rpy[i, :6] - all_left_rpy[i-1, :6]
             all_delta_actions[i-delta_act_sidx, 3:6] = normalize_angles(all_delta_actions[i-delta_act_sidx, 3:6])
-            all_delta_actions[i-delta_act_sidx, 6] = gripper[i, 0] / 120.0
+            all_delta_actions[i-delta_act_sidx, 6] = gripper[slices[i], 0] / 120.0
             all_delta_actions[i-delta_act_sidx, 7:13] = all_right_rpy[i, :6] - all_right_rpy[i-1, :6]
             all_delta_actions[i-delta_act_sidx, 10:13] = normalize_angles(all_delta_actions[i-delta_act_sidx, 10:13])
-            all_delta_actions[i-delta_act_sidx, 13] = gripper[i, 1] / 120.0
+            all_delta_actions[i-delta_act_sidx, 13] = gripper[slices[i], 1] / 120.0
 
     return all_abs_actions, all_delta_actions
 
