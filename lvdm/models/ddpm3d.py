@@ -1823,7 +1823,7 @@ class ACWMLatentDiffusion(LatentDiffusion):
         x_samples_video = x_samples_video.data.cpu().numpy()
         for frame_i in range(x_samples_video.shape[0]):
             frame = x_samples_video[frame_i]
-            cv2.imwrite(os.path.join(target_dir, "frame_{:05d}.png".format(frame_i)), frame[:,:,::-1])
+            cv2.imwrite(os.path.join(target_dir, "frame_{:05d}.jpg".format(frame_i)), frame[:,:,::-1])
 
 
         del pred, traj_all, samples
